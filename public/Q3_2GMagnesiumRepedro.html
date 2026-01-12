@@ -1,176 +1,135 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Centralized Club Application</title>
+<title>Club Application</title>
 
 <style>
     body {
         font-family: Arial;
-        background-color: #f0f0f0;
-        padding: 30px;
     }
 
-    form {
-        background: white;
-        padding: 20px;
-        width: 600px;
-        margin: auto;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px gray;
-    }
-
+    /* remove the big boxes but keep fieldsets */
     fieldset {
+        border: none;
+        padding: 0;
         margin-bottom: 15px;
-        border: 2px solid #ccc;
-        padding: 15px;
     }
 
     legend {
         font-weight: bold;
+        margin-bottom: 5px;
     }
 
     label {
         display: block;
-        margin-bottom: 10px;
+        margin: 8px 0;
     }
 
     input, select, textarea {
-        width: 95%;
-        padding: 8px;
-        margin-top: 5px;
-        border: 2px solid #aaa;
-        border-radius: 5px;
+        width: 300px;
     }
 
     input:focus, select:focus, textarea:focus {
-        border-color: blue;
-        background-color: #eef;
-        outline: none;
+        background-color: lightyellow;
+        border: 2px solid blue;
     }
 
     .error {
         border: 2px solid red;
-        background-color: #ffe6e6;
-    }
-
-    .buttons {
-        text-align: center;
-    }
-
-    input[type="submit"], input[type="reset"] {
-        width: 150px;
-        background-color: navy;
-        color: white;
-        border: none;
-        cursor: pointer;
-        margin: 10px;
-    }
-
-    input[type="submit"]:hover, input[type="reset"]:hover {
-        background-color: darkgreen;
+        background-color: #ffdede;
     }
 </style>
 
+
 <script>
     function confirmSubmit() {
-        return confirm("Are you sure you want to submit this application?");
+        return confirm("Do you want to submit this form?");
     }
 
     function confirmReset() {
-        return confirm("Are you sure you want to clear all the information?");
+        return confirm("Do you want to clear all inputs?");
     }
 
     function checkEmpty(field) {
-        if (field.value.trim() === "") {
-            field.classList.add("error");
+        if (field.value.trim() == "") {
+            field.className = "error";
         } else {
-            field.classList.remove("error");
+            field.className = "";
         }
     }
 </script>
 
 </head>
-
 <body>
 
 <form method="post" action="submit" onsubmit="return confirmSubmit()" onreset="return confirmReset()">
 
-    <h2>Centralized Club / Organization Application</h2>
+<h2>Club Application Form</h2>
 
-    <fieldset>
-        <legend>Student Information</legend>
+<fieldset>
+<legend>Student Info</legend>
 
-        <label>
-            Student ID:
-            <input type="number" required onblur="checkEmpty(this)">
-        </label>
+<label>Student ID
+<input type="number" required onblur="checkEmpty(this)">
+</label>
 
-        <label>
-            Full Name:
-            <input type="text" required onblur="checkEmpty(this)">
-        </label>
+<label>Full Name
+<input type="text" required onblur="checkEmpty(this)">
+</label>
 
-        <label>
-            Birthday:
-            <input type="date" required>
-        </label>
+<label>Birthday
+<input type="date" required>
+</label>
 
-        <label>
-            Email Address:
-            <input type="email" required onblur="checkEmpty(this)">
-        </label>
-    </fieldset>
+<label>Email
+<input type="email" required onblur="checkEmpty(this)">
+</label>
 
-    <fieldset>
-        <legend>Membership Information</legend>
+</fieldset>
 
-        <label>
-            Mobile Phone:
-            <input type="text" required onblur="checkEmpty(this)">
-        </label>
+<fieldset>
+<legend>Membership Info</legend>
 
-        <label>
-            Grade Level:
-            <select required>
-                <option value="">-- Select --</option>
-                <option value="g7">Grade 7</option>
-                <option value="g8">Grade 8</option>
-                <option value="g9">Grade 9</option>
-                <option value="g10">Grade 10</option>
-            </select>
-        </label>
+<label>Mobile Phone
+<input type="text" required onblur="checkEmpty(this)">
+</label>
 
-        <label>
-            Intern / Extern:
-            <br>
-            <input type="radio" name="status" value="int" required> Intern
-            <input type="radio" name="status" value="ext"> Extern
-        </label>
+<label>Grade Level
+<select required>
+    <option value="">Select</option>
+    <option value="7">Grade 7</option>
+    <option value="8">Grade 8</option>
+    <option value="9">Grade 9</option>
+    <option value="10">Grade 10</option>
+</select>
+</label>
 
-        <label>
-            Preferred Organization / Club:
-            <select required>
-                <option value="">-- Choose Club --</option>
-                <option value="sci">Science Club</option>
-                <option value="art">Art Club</option>
-                <option value="sport">Sports Club</option>
-                <option value="music">Music Club</option>
-                <option value="tech">Tech Club</option>
-            </select>
-        </label>
+<label>Intern / Extern
+<br>
+<input type="radio" name="type" value="I" required> Intern
+<input type="radio" name="type" value="E"> Extern
+</label>
 
-        <label>
-            Why do you want to join?
-            <textarea rows="4" required onblur="checkEmpty(this)"></textarea>
-        </label>
+<label>Preferred Club
+<select required>
+    <option value="">Select</option>
+    <option value="sci">Science</option>
+    <option value="art">Art</option>
+    <option value="sport">Sports</option>
+    <option value="tech">Tech</option>
+    <option value="music">Music</option>
+</select>
+</label>
 
-    </fieldset>
+<label>Why do you want to join?
+<br>
+<textarea rows="3" required onblur="checkEmpty(this)"></textarea>
+</label>
 
-    <div class="buttons">
-        <input type="submit" value="Submit">
-        <input type="reset" value="Reset">
-    </div>
+</fieldset>
+
+<input type="submit" value="Submit">
+<input type="reset" value="Reset">
 
 </form>
 
