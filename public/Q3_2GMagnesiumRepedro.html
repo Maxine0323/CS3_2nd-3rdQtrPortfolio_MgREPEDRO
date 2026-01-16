@@ -1,136 +1,126 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Club Application</title>
-
-<style>
-    body {
-        font-family: Arial;
-    }
-
-    fieldset {
-        border: none;
-        padding: 0;
-        margin-bottom: 15px;
-    }
-
-    legend {
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-
-    label {
-        display: block;
-        margin: 8px 0;
-    }
-
-    input, select, textarea {
-        width: 300px;
-    }
-
-    input:focus, select:focus, textarea:focus {
-        background-color: rgb(255, 233, 191);
-        border: 2px solid rgb(255, 187, 0);
-    }
-
-    .error {
-        border: 2px solid rgb(255, 114, 114);
-        background-color: #ffbbbb;
-    }
-</style>
-
-
-<script>
-    function confirmSubmit() {
-        return confirm("Do you want to submit this form?");
-    }
-
-    function confirmReset() {
-        return confirm("Do you want to clear all inputs?");
-    }
-
-    function checkEmpty(field) {
-        if (field.value.trim() == "") {
-            field.className = "error";
-        } else {
-            field.className = "";
+    <title>Q3_2GSectionLastName</title>
+    <style>
+        
+        body {
+            background-color: rgb(255, 216, 216);
+            font-family: sans-serif;
+            padding: 20px;
         }
-    }
-</script>
 
+        form {
+            background-color: white;
+            padding: 20px;
+            width: 400px;
+            border: 2px solid black;
+        }
+
+       
+        fieldset {
+            margin-bottom: 15px;
+        }
+
+       
+        input:focus, select:focus, textarea:focus {
+            background-color: lightyellow;
+            border: 2px solid blue;
+        }
+
+       
+        .missing {
+            background-color: pink;
+            border: 2px solid red;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 
-<form method="post" action="submit" onsubmit="return confirmSubmit()" onreset="return confirmReset()">
+    <form method="post" action="submit" 
+          onsubmit="return confirm('Submit this form?')" 
+          onreset="return confirm('Clear all data?')">
 
-<h2>Club Application Form</h2>
+        <h2>Application Form</h2>
 
-<fieldset>
-<legend>Student Info</legend>
+        <fieldset>
+            <legend>Personal Data</legend>
+            
+            <label>Student ID: 
+                <input type="number" name="sid" required onblur="validate(this)">
+            </label>
 
-<label>Student ID
-<input type="number" required onblur="checkEmpty(this)">
-</label>
+            <label>Full Name: 
+                <input type="text" name="fname" required onblur="validate(this)">
+            </label>
 
-<label>Full Name
-<input type="text" required onblur="checkEmpty(this)">
-</label>
+            <label>Birthday: 
+                <input type="date" name="bday" required onblur="validate(this)">
+            </label>
 
-<label>Birthday
-<input type="date" required>
-</label>
+            <label>Email: 
+                <input type="email" name="eml" required onblur="validate(this)">
+            </label>
+        </fieldset>
 
-<label>Email
-<input type="email" required onblur="checkEmpty(this)">
-</label>
+        <fieldset>
+            <legend>Club Details</legend>
 
-</fieldset>
+            <label>Mobile Phone: 
+                <input type="text" name="phone" required onblur="validate(this)">
+            </label>
 
-<fieldset>
-<legend>Membership Info</legend>
+            <label>Grade Level:
+                <select name="grade" required>
+                    <option value="">Select</option>
+                    <option value="11">Grade 7</option>
+                    <option value="12">Grade 8</option>
+                    <option value="12">Grade 9</option>
+                    <option value="12">Grade 10</option>
+                    <option value="12">Grade 11</option>
+                    <option value="12">Grade 12</option>
+                </select>
+            </label>
 
-<label>Mobile Phone
-<input type="text" required onblur="checkEmpty(this)">
-</label>
+            <label>Status:</label>
+            <label><input type="radio" name="status" value="I" required> Intern</label>
+            <label><input type="radio" name="status" value="E" required> Extern</label>
 
-<label>Grade Level
-<select required>
-    <option value="">Select</option>
-    <option value="7">Grade 7</option>
-    <option value="8">Grade 8</option>
-    <option value="9">Grade 9</option>
-    <option value="10">Grade 10</option>
-</select>
-</label>
+            <label>Club Choice:
+                <select name="club" required>
+                    <option value="">Select</option>
+                    <option value="math">Loqui</option>
+                    <option value="sci">Himig</option>
+                    <option value="art">Sagala</option>
+                    <option value="music">Likha</option>
+                    <option value="chess">Alianti</option>
+                </select>
+            </label>
 
-<label>Intern / Extern
-<br>
-<input type="radio" name="type" value="I" required> Intern
-<input type="radio" name="type" value="E"> Extern
-</label>
+            <label>Why join?
+                <textarea name="reason" required onblur="validate(this)"></textarea>
+            </label>
+        </fieldset>
 
-<label>Preferred Club
-<select required>
-    <option value="">Select</option>
-    <option value="sci">Science</option>
-    <option value="art">Art</option>
-    <option value="sport">Sports</option>
-    <option value="tech">Tech</option>
-    <option value="music">Music</option>
-</select>
-</label>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
 
-<label>Why do you want to join?
-<br>
-<textarea rows="3" required onblur="checkEmpty(this)"></textarea>
-</label>
+    </form>
 
-</fieldset>
-
-<input type="submit" value="Submit">
-<input type="reset" value="Reset">
-
-</form>
+    <script>
+        function validate(element) {
+            if (element.value == "") {
+                element.className = "missing";
+            } else {
+                element.className = "";
+            }
+        }
+    </script>
 
 </body>
 </html>
