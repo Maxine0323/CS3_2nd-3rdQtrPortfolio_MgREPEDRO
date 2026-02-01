@@ -1,30 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Q3_3GMagnesiumRepedro</title>
+    <title>Q3_2GMagnesiumRepedro</title>
     <style>
-        body {
-            background-color: rgb(255, 216, 216); 
-            font-family: sans-serif;
-            padding: 20px;
-        }
-        form {
-            background-color: white;
-            padding: 20px;
-            width: 400px;
-            border: 2px solid black;
-        }
+        body { background-color: rgb(255, 216, 216); font-family: sans-serif; padding: 20px; }
+        form { background-color: white; padding: 20px; width: 400px; border: 2px solid black; }
         fieldset { margin-bottom: 15px; }
-        input:focus, select:focus, textarea:focus {
-            background-color: lightyellow;
-            border: 2px solid blue;
-        }
-        .missing {
-            background-color: pink;
-            border: 2px solid red;
-        }
+        input:focus, select:focus, textarea:focus { background-color: lightyellow; border: 2px solid blue; }
+        .missing { background-color: pink; border: 2px solid red; }
         label { display: block; margin-top: 10px; }
-        .buttons { margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -53,27 +37,25 @@
                     <option value="12">Grade 12</option>
                 </select>
             </label>
-            <label>Status:</label>
-            <label><input type="radio" name="status" value="Intern" required> Intern</label>
-            <label><input type="radio" name="status" value="Extern" required> Extern</label>
-
+            <label>Status: 
+                <input type="radio" name="status" value="Intern" required> Intern
+                <input type="radio" name="status" value="Extern" required> Extern
+            </label>
             <label>Club Choice:
                 <select name="club" required>
                     <option value="">Select</option>
-                    <option value="math">Loqui</option>
-                    <option value="sci">Himig</option>
-                    <option value="art">Sagala</option>
-                    <option value="music">Likha</option>
-                    <option value="chess">Alianti</option>
+                    <option value="Loqui">Loqui</option>
+                    <option value="Himig">Himig</option>
+                    <option value="Sagala">Sagala</option>
+                    <option value="Likha">Likha</option>
+                    <option value="Alianti">Alianti</option>
                 </select>
             </label>
         </fieldset>
 
-        <div class="buttons">
-            <input type="submit" value="Submit">
-            <input type="reset" value="Reset" onclick="return confirm('Clear all data?')">
-            <button type="button" onclick="location.href='Q3_3GMagnesiumRepedro.html'">View Signups</button>
-        </div>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset" onclick="return confirm('Clear all data?')">
+        <button type="button" onclick="location.href='Q3_3GMagnesiumRepedro.html'">View Signups</button>
     </form>
 
     <script>
@@ -83,17 +65,20 @@
 
         function saveData(event) {
             event.preventDefault(); 
-            if (!confirm('Submit this form?')) return;
+            if(!confirm("Submit this form?")) return;
 
             const form = document.getElementById('signupForm');
             const formData = new FormData(form);
-            const newEntry = Object.fromEntries(formData.entries());
+            const studentObject = Object.fromEntries(formData.entries());
 
-            let list = JSON.parse(localStorage.getItem('clubSignups')) || [];
-            list.push(newEntry);
-            localStorage.setItem('clubSignups', JSON.stringify(list));
+            
+            let allSignups = JSON.parse(localStorage.getItem('clubSignups')) || [];
+            allSignups.push(studentObject);
+            
+           
+            localStorage.setItem('clubSignups', JSON.stringify(allSignups));
 
-            alert("Data saved successfully!");
+            alert("Signup Saved!");
             form.reset();
         }
     </script>

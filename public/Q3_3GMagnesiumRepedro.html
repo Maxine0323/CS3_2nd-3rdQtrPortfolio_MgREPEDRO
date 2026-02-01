@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Q3_3GMagnesiumRepedro</title>
+    <title>View Signups - Maxine Repedro</title>
     <style>
         body {
             background-color: rgb(255, 216, 216);
@@ -41,17 +41,17 @@
     <h1>Show List of Students Who Signed-Up</h1>
     <h3>by Maxine Repedro</h3>
     
-    <p><a href="Q3_2GMagnesiumRepedro.html">Back to Signup Page</a></p>
+    <p><a href="Q3_3GMagnesiumRepedro.html">Back to Signup Page</a></p>
 
     <div class="filter-box">
         <label>Select Your Club: </label>
         <select id="clubFilter" onchange="displayTable()">
-            <option value="all">select a club</option>
-            <option value="math">Loqui</option>
-            <option value="sci">Himig</option>
-            <option value="art">Sagala</option>
-            <option value="music">Likha</option>
-            <option value="chess">Alianti</option>
+            <option value="all">-- all clubs --</option>
+            <option value="Loqui">Loqui</option>
+            <option value="Himig">Himig</option>
+            <option value="Sagala">Sagala</option>
+            <option value="Likha">Likha</option>
+            <option value="Alianti">Alianti</option>
         </select>
         <p>Total Signup: <b id="totalCount">0</b></p>
     </div>
@@ -85,6 +85,7 @@
                 : signupList.filter(student => student.club === filterValue);
 
             countDisplay.innerText = filteredResults.length;
+
             tableBody.innerHTML = "";
 
             filteredResults.forEach(student => {
