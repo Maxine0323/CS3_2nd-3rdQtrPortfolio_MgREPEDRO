@@ -4,7 +4,7 @@
     <title>Q3_3GMagnesiumRepedro</title>
     <style>
         body {
-            background-color: rgb(255, 216, 216); /* Original Pink */
+            background-color: rgb(255, 216, 216); 
             font-family: sans-serif;
             padding: 20px;
         }
@@ -72,7 +72,7 @@
         <div class="buttons">
             <input type="submit" value="Submit">
             <input type="reset" value="Reset" onclick="return confirm('Clear all data?')">
-            <button type="button" onclick="location.href='viewSignUps.html'">View Signups</button>
+            <button type="button" onclick="location.href='Q3_3GMagnesiumRepedro.html'">View Signups</button>
         </div>
     </form>
 
@@ -82,14 +82,13 @@
         }
 
         function saveData(event) {
-            event.preventDefault(); // Requirement: Stop page reload
+            event.preventDefault(); 
             if (!confirm('Submit this form?')) return;
 
             const form = document.getElementById('signupForm');
             const formData = new FormData(form);
             const newEntry = Object.fromEntries(formData.entries());
 
-            // Requirement: Save to localStorage as array of objects
             let list = JSON.parse(localStorage.getItem('clubSignups')) || [];
             list.push(newEntry);
             localStorage.setItem('clubSignups', JSON.stringify(list));

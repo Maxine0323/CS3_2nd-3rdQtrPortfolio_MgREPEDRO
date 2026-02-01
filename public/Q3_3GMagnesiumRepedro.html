@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Q3_3GMagnesiumRepedro</title>
+    <style>
+        body {
+            background-color: rgb(255, 216, 216);
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            margin-top: 20px;
+            border: 2px solid black;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .filter-box {
+            background-color: white;
+            padding: 15px;
+            border: 2px solid black;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Show List of Students Who Signed-Up</h1>
+    <h3>by Maxine Repedro</h3>
+    
+    <p><a href="Q3_2GMagnesiumRepedro.html">Back to Signup Page</a></p>
+
+    <div class="filter-box">
+        <label>Select Your Club: </label>
+        <select id="clubFilter" onchange="displayTable()">
+            <option value="all">select a club</option>
+            <option value="math">Loqui</option>
+            <option value="sci">Himig</option>
+            <option value="art">Sagala</option>
+            <option value="music">Likha</option>
+            <option value="chess">Alianti</option>
+        </select>
+        <p>Total Signup: <b id="totalCount">0</b></p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Club</th>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Grade</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="tableData">
+            </tbody>
+    </table>
+
+    <script>
+        function displayTable() {
+            const filterValue = document.getElementById('clubFilter').value;
+            const tableBody = document.getElementById('tableData');
+            const countDisplay = document.getElementById('totalCount');
+
+            const signupList = JSON.parse(localStorage.getItem('clubSignups')) || [];
+
+            const filteredResults = (filterValue === "all") 
+                ? signupList 
+                : signupList.filter(student => student.club === filterValue);
+
+            countDisplay.innerText = filteredResults.length;
+            tableBody.innerHTML = "";
+
+            filteredResults.forEach(student => {
+                let row = `<tr>
+                    <td>${student.club}</td>
+                    <td>${student.sid}</td>
+                    <td>${student.fname}</td>
+                    <td>${student.grade}</td>
+                    <td>${student.eml}</td>
+                    <td>${student.phone}</td>
+                    <td>${student.status}</td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        window.onload = displayTable;
+    </script>
+
+</body>
+</html>
