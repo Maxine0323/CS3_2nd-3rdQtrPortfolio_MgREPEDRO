@@ -1,95 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Q3_2GSectionLastName</title>
+    <title>Q3_3GMagnesiumRepedro</title>
     <style>
-        
         body {
-            background-color: rgb(255, 216, 216);
+            background-color: rgb(255, 216, 216); /* Original Pink */
             font-family: sans-serif;
             padding: 20px;
         }
-
         form {
             background-color: white;
             padding: 20px;
             width: 400px;
             border: 2px solid black;
         }
-
-       
-        fieldset {
-            margin-bottom: 15px;
-        }
-
-       
+        fieldset { margin-bottom: 15px; }
         input:focus, select:focus, textarea:focus {
             background-color: lightyellow;
             border: 2px solid blue;
         }
-
-       
         .missing {
             background-color: pink;
             border: 2px solid red;
         }
-
-        label {
-            display: block;
-            margin-top: 10px;
-        }
+        label { display: block; margin-top: 10px; }
+        .buttons { margin-top: 15px; }
     </style>
 </head>
 <body>
 
-    <form method="post" action="submit" 
-          onsubmit="return confirm('Submit this form?')" 
-          onreset="return confirm('Clear all data?')">
-
+    <form id="signupForm" onsubmit="return saveData(event)">
         <h2>Application Form</h2>
 
         <fieldset>
             <legend>Personal Data</legend>
-            
-            <label>Student ID: 
-                <input type="number" name="sid" required onblur="validate(this)">
-            </label>
-
-            <label>Full Name: 
-                <input type="text" name="fname" required onblur="validate(this)">
-            </label>
-
-            <label>Birthday: 
-                <input type="date" name="bday" required onblur="validate(this)">
-            </label>
-
-            <label>Email: 
-                <input type="email" name="eml" required onblur="validate(this)">
-            </label>
+            <label>Student ID: <input type="number" name="sid" required onblur="validate(this)"></label>
+            <label>Full Name: <input type="text" name="fname" required onblur="validate(this)"></label>
+            <label>Email: <input type="email" name="eml" required onblur="validate(this)"></label>
         </fieldset>
 
         <fieldset>
             <legend>Club Details</legend>
-
-            <label>Mobile Phone: 
-                <input type="text" name="phone" required onblur="validate(this)">
-            </label>
-
+            <label>Mobile Phone: <input type="text" name="phone" required onblur="validate(this)"></label>
             <label>Grade Level:
                 <select name="grade" required>
                     <option value="">Select</option>
-                    <option value="11">Grade 7</option>
-                    <option value="12">Grade 8</option>
-                    <option value="12">Grade 9</option>
-                    <option value="12">Grade 10</option>
-                    <option value="12">Grade 11</option>
+                    <option value="7">Grade 7</option>
+                    <option value="8">Grade 8</option>
+                    <option value="9">Grade 9</option>
+                    <option value="10">Grade 10</option>
+                    <option value="11">Grade 11</option>
                     <option value="12">Grade 12</option>
                 </select>
             </label>
-
             <label>Status:</label>
-            <label><input type="radio" name="status" value="I" required> Intern</label>
-            <label><input type="radio" name="status" value="E" required> Extern</label>
+            <label><input type="radio" name="status" value="Intern" required> Intern</label>
+            <label><input type="radio" name="status" value="Extern" required> Extern</label>
 
             <label>Club Choice:
                 <select name="club" required>
@@ -101,26 +67,36 @@
                     <option value="chess">Alianti</option>
                 </select>
             </label>
-
-            <label>Why join?
-                <textarea name="reason" required onblur="validate(this)"></textarea>
-            </label>
         </fieldset>
 
-        <input type="submit" value="Submit">
-        <input type="reset" value="Reset">
-
+        <div class="buttons">
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset" onclick="return confirm('Clear all data?')">
+            <button type="button" onclick="location.href='viewSignUps.html'">View Signups</button>
+        </div>
     </form>
 
     <script>
         function validate(element) {
-            if (element.value == "") {
-                element.className = "missing";
-            } else {
-                element.className = "";
-            }
+            element.className = (element.value == "") ? "missing" : "";
+        }
+
+        function saveData(event) {
+            event.preventDefault(); // Requirement: Stop page reload
+            if (!confirm('Submit this form?')) return;
+
+            const form = document.getElementById('signupForm');
+            const formData = new FormData(form);
+            const newEntry = Object.fromEntries(formData.entries());
+
+            // Requirement: Save to localStorage as array of objects
+            let list = JSON.parse(localStorage.getItem('clubSignups')) || [];
+            list.push(newEntry);
+            localStorage.setItem('clubSignups', JSON.stringify(list));
+
+            alert("Data saved successfully!");
+            form.reset();
         }
     </script>
-
 </body>
 </html>
