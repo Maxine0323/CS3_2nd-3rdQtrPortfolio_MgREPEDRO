@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+        h2 { text-align: center; margin-top: 0; }
+        .field { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .stars { font-size: 24px; cursor: pointer; color: #ccc; }
+        .stars span.selected { color: #ffcc00; }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        hr { border: 0; border-top: 1px solid #eee; margin: 20px 0; }
+        .movie-entry {
+            background: #fafafa;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            border: 1px solid #eee;
+            font-size: 14px;
+        }
+        .gold { color: #ffcc00; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Add a Movie</h2>
+    <div class="field">
+        <label>Title:</label>
+        <input type="text" id="title">
+    </div>
+    <div class="field">
+        <label>Year:</label>
+        <input type="text" id="year">
+    </div>
+    <div class="field">
+        <label>Genre:</label>
+        <select id="genre">
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Horror">Horror</option>
+        </select>
+    </div>
+    <div class="field">
+        <label>Rating:</label>
+        <div class="stars" id="starContainer">
+            <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
+        </div>
+    </div>
+    <button onclick="saveMovie()">Add Movie</button>
+
+    <hr>
+    <h2>Movie List</h2>
+    <div id="list"></div>
+</div>
+
+<script>
+    let rating = 0;
+    const starSpans = document.querySelectorAll('#starContainer span');
+
+    starSpans.forEach(s => {
+        s.onclick = () => {
+            rating = s.dataset.v;
+            starSpans.forEach(el => el.classList.toggle('selected', el.dataset.v <= rating));
+        };
+    });
+
+    function saveMovie() {
+        const movie = {
+            title: document.getElementById('title').value,
+            year: document.getElementById('year').value,
+            genre: document.getElementById('genre').value,
+            rating: rating
+        };
+
+        const movies = JSON.parse(localStorage.getItem('movies') || '[]');
+        movies.push(movie);
+        localStorage.setItem('movies', JSON.stringify(movies));
+        
+        document.getElementById('title').value = '';
+        document.getElementById('year').value = '';
+        rating = 0;
+        starSpans.forEach(el => el.classList.remove('selected'));
+        render();
+    }
+
+    function render() {
+        const container = document.getElementById('list');
+        const movies = JSON.parse(localStorage.getItem('movies') || '[]');
+        container.innerHTML = movies.map(m => `
+            <div class="movie-entry">
+                ${m.title} (${m.year}) - ${m.genre}, Rating: <span class="gold">${'★'.repeat(m.rating)}</span>
+            </div>
+        `).join('');
+    }
+
+    render();
+</script>
+
+</body>
+</html>
