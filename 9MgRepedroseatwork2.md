@@ -57,17 +57,23 @@
 
 - Guided Question: What changed compared to the default static positioning? Try to give different values to top and left or you can change it to bottom, right.
 
+  The sidebar shifted 20px down and 20px right. Unlike static, relative allows offsets while the element still keeps its original space in the layout.
+
 ### Step 2 (Fixed):
 
 - Add in css ```position: fixed; bottom: 0; width: 100%;``` to .footer.
 
 - Guided Question: What happens when you scroll the page? Why does the footer behave differently from position relative?
 
+  The footer stays pinned to the screen during scrolling. It differs because it is relative to the viewport (the screen) rather than the page content.
+
 ### Step 3 (Absolute):
 
 - Add in css ```position: absolute; top: 66px; left: 200px;``` to .content.
 
 - Guided Question: What is the effect of position: absolute on an element? How is it different from fixed?
+
+  It removes the element from the normal flow, placing it relative to its nearest positioned ancestor. Unlike fixed, it scrolls away with the page. 
 
 ### Step 4 : (Absolute)
 
@@ -87,7 +93,8 @@
 - Give .content a z-index: 1.
 
 - Guided Question: Why does the notice appear on top of the content? What happens if you swap the z‑index values?
-The notice is on top because its z-index (2) is higher than the content's z-index (1). If I swap the values, the notice will be hidden behind the content box.
+
+  The notice is on top because its z-index (2) is higher than the content's z-index (1). If I swap the values, the notice will be hidden behind the content box.
 
 - Challenge: 
     * What changes that you have to do on the code that will position .notice box on the top right corner of the .content box? Please write the code on paper as well (both html and css on the part of .notice and .content).
