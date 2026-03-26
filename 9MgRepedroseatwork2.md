@@ -93,12 +93,29 @@
     * Try to change the position of .content to relative then to fixed. What do you observed each time?
     * What do you observe on about the effect of z-index on .notice and .content boxes?
 
+    Top Right Position: I would wrap the content and notice in a container with position: relative;. Then, I would set the notice to position: absolute; top: 0; right: 0;.
+
+    Relative vs Fixed Content: When relative, the content stays in the flow but can be shifted. When fixed, it floats in one spot on the screen and stays there even when I scroll.
+
+    Z-Index Observation: I observed that z-index only works on elements that have a position (relative, absolute, or fixed). It controls which element sits on "top" of the others.
+
 3. Please answer the following reflection questions (15 minutes)
 
     a. Could you summarize the differences between the CSS position values (static, relative, absolute, fixed)? 
+    
+    Static: Normal page flow (default).
+    Relative: Moved from its original spot without affecting others.
+    Absolute: Removed from flow; positioned relative to a parent.
+    Fixed: Stays in one spot on the screen while scrolling.
 
     b. How does absolute positioning depend on its parent element?
+    
+    It looks for the nearest parent with a position (like relative). If none exist, it uses the body as its reference point.
 
     c. How do you differentiate sticky from fixed (you can research on sticky)?
 
+    Fixed is always stuck to the screen. Sticky acts normally until you scroll to a certain point, where it then "sticks" within its parent container.
+
     d. If you were designing a webpage for a school event, how might you use positioning to highlight important information? Please give concrete examples.
+
+    I would use Fixed for a "Register" button that stays visible, Absolute to put "New" badges on event posters, and Sticky for date headers so they stay at the top while scrolling through schedules.
